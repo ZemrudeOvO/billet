@@ -1,10 +1,13 @@
-A simple financial management software.
+一个简单的记帐软件
 
 # FIX
-- [ ] switch to interactive data processing
-- [ ] ranking persent is too long, shorten it to only two decimal places
-- [ ] delete Delete the plus and minus signs in ranking
+- [ ] 数据排序修改为两位小数
+- [ ] 删除收入和支出数值前的正负号
 
 # TODO
-- [ ] custom config (using Reflection)
-- [ ] custom income & expense project
+- [ ] 将数据处理部分改为可交互式
+- [ ] 配置文件（使用反射）
+
+# How to use
+1. cd %YOUR APP DIR%
+2. ./billet -h

@@ -1,6 +1,7 @@
-package main
+package billet
 
 import "core:fmt"
+import "core:os"
 import "core:reflect"
 import "core:strings"
 
@@ -31,6 +32,6 @@ load_config :: proc(file_name: string) {
 	//defer delete(data)
 	file_configs := strings.split_lines(transmute(string)data)
 
-	type := typeid_of(&config)
+	type := typeid_of(config)
 	names := reflect.struct_field_names(type)
 }
