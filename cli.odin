@@ -107,7 +107,7 @@ cli_args :: proc() {
 			} else {
 				fmt.println(
 					"wrong argumens: -er: get month expense ranking: yyyy mm	eg. ./billet -er 2023 11",
-				);
+				)
 			}
 		case "-a":
 			if len(os.args) == 9 {

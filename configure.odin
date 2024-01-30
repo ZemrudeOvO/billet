@@ -22,8 +22,6 @@ item :: struct {
 	account:     string,
 	description: string,
 }
-
-items: []item = make([]item, len(strings.split_lines(load_table_file(file_name))))
 */
 
 load_config :: proc(file_name: string) {

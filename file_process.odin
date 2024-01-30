@@ -5,6 +5,11 @@ import "core:os"
 import "core:strconv"
 import "core:strings"
 
+change_dir :: proc() {
+	path := strings.trim_right(os.args[0], "billet")
+	os.set_current_directory(path)
+}
+
 load_table_file :: proc(file_name: string) -> string {
 	data, ok := os.read_entire_file_from_filename(file_name)
 	assert(ok, "Failed to load the file")
@@ -28,7 +33,7 @@ items: []item = make([]item, len(strings.split_lines(load_table_file(file_name))
 split_by_token :: proc(file_name: string) {
 	lines := strings.split_lines(load_table_file(file_name))
 	for i := 0; i < len(lines); i += 1 {
-		token := strings.split(lines[i], "\t")
+		token := strings.split(lines[i], " ")
 		date := strings.split(token[1], "-")
 		items[i] =  {
 			token[0],
