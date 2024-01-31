@@ -8,22 +8,37 @@ import "core:strings"
 
 cli_args :: proc() {
 	if len(os.args) == 1 {
-		fmt.println("-h: get help")
+		fmt.println("0: add data\n1: get income\n2: get expense\n")
+		buf: [256]byte
+		n, err := os.read(os.stdin, buf[:])
+		assert(err >= 0, string("input error"))
+		switch cast(string)buf[:n - 1] {
+		case "0":
+			args: [7]string
+			//fmt.println( "wrong arguments: -a: add data: eg. ./billet -a 饮食 2023 11 19 -25.8 信用卡 麦当劳",)
+			fmt.println("project:\n1: 工资\n2: 家里补助\n3: 退款\n额外收入\n")
+		case "1":
+		case "2":
+		case:
+		}
 	} else {
 		switch os.args[1] {
 		case "-h":
-			fmt.println("-i: get month income: yyyy mm	eg. ./billet -i 2023 11")
-			fmt.println("-e: get month expense: yyyy mm	eg. ./billet -e 2023 11")
-			fmt.println("-ea: get month expense except housing: yyyy mm	eg. ./billet -ea 2023 11")
+			fmt.print("\n")
+			fmt.println("-i:\t[get month income: yyyy mm]\neg. ./billet -i 2023 11\n")
+			fmt.println("-e:\t[get month expense: yyyy mm]\neg. ./billet -e 2023 11\n")
 			fmt.println(
-				"-eb: get month expense before billing day: yyyy mm ?d	eg. ./billet -eb 2023 12 19",
+				"-ea:\t[get month expense except housing: yyyy mm]\neg. ./billet -ea 2023 11\n",
 			)
-			fmt.println("-ir: get month income ranking: yyyy mm	eg. ./billet -ir 2023 11")
-			fmt.println("-er: get month expense ranking: yyyy mm	eg. ./billet -er 2023 11")
 			fmt.println(
-				"-a: add data: eg. ./billet -a 饮食 2023 11 19 -25.8 信用卡 麦当劳",
+				"-eb:\t[get month expense before billing day: yyyy mm ?d]\neg. ./billet -eb 2023 12 19\n",
 			)
-			fmt.println("-ey: get year expense ranking: yyyy eg. ./billet -ey 2023")
+			fmt.println("-ir:\t[get month income ranking: yyyy mm]\neg. ./billet -ir 2023 11\n")
+			fmt.println("-er:\t[get month expense ranking: yyyy mm]\neg. ./billet -er 2023 11\n")
+			fmt.println(
+				"-a:\t[add data]\neg. ./billet -a 饮食 2023 11 19 -25.8 信用卡 麦当劳\n",
+			)
+			fmt.println("-ey:\t[get year expense yearly: yyyy]\neg. ./billet -ey 2023\n")
 		case "-i":
 			if len(os.args) == 4 {
 				fmt.println(

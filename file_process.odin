@@ -10,7 +10,7 @@ change_dir :: proc() {
 	os.set_current_directory(path)
 }
 
-load_table_file :: proc(file_name: string) -> string {
+load_table_file :: proc() -> string {
 	data, ok := os.read_entire_file_from_filename(file_name)
 	assert(ok, "Failed to load the file")
 	//defer delete(data)
@@ -27,11 +27,11 @@ item :: struct {
 	description: string,
 }
 
-items: []item = make([]item, len(strings.split_lines(load_table_file(file_name))))
+items: []item = make([]item, len(strings.split_lines(load_table_file())))
 
 
 split_by_token :: proc(file_name: string) {
-	lines := strings.split_lines(load_table_file(file_name))
+	lines := strings.split_lines(load_table_file())
 	for i := 0; i < len(lines); i += 1 {
 		token := strings.split(lines[i], " ")
 		date := strings.split(token[1], "-")

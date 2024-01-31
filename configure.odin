@@ -24,8 +24,8 @@ item :: struct {
 }
 */
 
-load_config :: proc(file_name: string) {
-	data, ok := os.read_entire_file_from_filename(file_name)
+load_config :: proc() {
+	data, ok := os.read_entire_file_from_filename(config_path)
 	assert(ok, "Failed to load the file")
 	//defer delete(data)
 	file_configs := strings.split_lines(transmute(string)data)

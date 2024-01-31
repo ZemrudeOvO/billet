@@ -1,19 +1,14 @@
 package billet
 
-import "core:fmt"
-import "core:os"
-import "core:strings"
-
 file_name :: "data.blt"
+config_path :: "config.cfg"
 
 main :: proc() {
-	change_dir()
+	load_config()
 
-	load_config("config.cfg")
-
-	load_table_file(file_name)
-	defer delete_items()
+	load_table_file();defer delete_items()
 	split_by_token(file_name)
+	generate_project_data()
 
 	cli_args()
 }

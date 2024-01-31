@@ -1,6 +1,7 @@
 package billet
 
 import "core:fmt"
+import "core:slice"
 import "core:strconv"
 import "core:strings"
 
@@ -76,11 +77,19 @@ income :: struct {
 	persent: f64,
 }
 
+/*
 income_data: [dynamic]income =  {
 	{"工资", 0, 0},
 	{"家里补助", 0, 0},
 	{"退款", 0, 0},
 	{"额外收入", 0, 0},
+}
+*/
+income_data: [dynamic]income
+
+generate_project_data :: proc() {
+	for i in items {
+	}
 }
 
 
@@ -119,6 +128,8 @@ expense :: struct {
 	expense: f64,
 	persent: f64,
 }
+
+/*
 expense_data: [dynamic]expense =  {
 	{"游戏", 0, 0},
 	{"交通", 0, 0},
@@ -133,6 +144,8 @@ expense_data: [dynamic]expense =  {
 	{"住房相关", 0, 0},
 	{"软件", 0, 0},
 }
+*/
+expense_data: [dynamic]expense
 
 get_expense_ranking :: proc(year, month: int) {
 	for item in items {
