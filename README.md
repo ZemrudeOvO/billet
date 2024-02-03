@@ -5,9 +5,8 @@
 - [ ] 删除收入和支出数值前的正负号
 
 # TODO
-- [ ] 将数据处理部分改为可交互式
 - [ ] 配置文件（使用反射）
 
 # How to use
 1. cd %YOUR APP DIR%
-2. ./billet -h
+2. ./billet

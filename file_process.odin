@@ -62,17 +62,17 @@ add_item :: proc(
 ) {
 	str := [?]string {
 		project,
-		"\t",
+		" ",
 		year,
 		"-",
 		month,
 		"-",
 		day,
-		"\t",
+		" ",
 		cost,
-		"\t",
+		" ",
 		account,
-		"\t",
+		" ",
 		description,
 	}
 

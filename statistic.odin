@@ -77,21 +77,46 @@ income :: struct {
 	persent: f64,
 }
 
-/*
-income_data: [dynamic]income =  {
-	{"工资", 0, 0},
-	{"家里补助", 0, 0},
-	{"退款", 0, 0},
-	{"额外收入", 0, 0},
+expense :: struct {
+	project: string,
+	expense: f64,
+	persent: f64,
 }
-*/
+
 income_data: [dynamic]income
+expense_data: [dynamic]expense
 
 generate_project_data :: proc() {
-	for i in items {
+	income_project_origin: [dynamic]string
+	expense_project_origin: [dynamic]string
+	for i := 0; i < len(items); i += 1 {
+		if items[i].cost > 0 {
+			append(&income_project_origin, items[i].project)
+		} else {
+			append(&expense_project_origin, items[i].project)
+		}
+	}
+	slice.sort(income_project_origin[:])
+	slice.sort(expense_project_origin[:])
+
+	income_data = {{income_project_origin[0], 0, 0}}
+	expense_data = {{expense_project_origin[0], 0, 0}}
+
+	for i := 0; i < len(income_project_origin); i += 1 {
+		new_data: income
+		if income_project_origin[i] != income_data[len(income_data) - 1].project {
+			new_data = income{income_project_origin[i], 0, 0}
+			append(&income_data, new_data)
+		}
+	}
+	for i := 0; i < len(expense_project_origin); i += 1 {
+		new_data: expense
+		if expense_project_origin[i] != expense_data[len(expense_data) - 1].project {
+			new_data = expense{expense_project_origin[i], 0, 0}
+			append(&expense_data, new_data)
+		}
 	}
 }
-
 
 get_income_ranking :: proc(year, month: int) {
 	for item in items {
@@ -121,31 +146,6 @@ get_income_ranking :: proc(year, month: int) {
 		}
 	}
 }
-
-
-expense :: struct {
-	project: string,
-	expense: f64,
-	persent: f64,
-}
-
-/*
-expense_data: [dynamic]expense =  {
-	{"游戏", 0, 0},
-	{"交通", 0, 0},
-	{"周边购买", 0, 0},
-	{"爱好消费", 0, 0},
-	{"饮食", 0, 0},
-	{"日用百货", 0, 0},
-	{"订阅服务", 0, 0},
-	{"零食饮料", 0, 0},
-	{"医药", 0, 0},
-	{"娱乐活动", 0, 0},
-	{"住房相关", 0, 0},
-	{"软件", 0, 0},
-}
-*/
-expense_data: [dynamic]expense
 
 get_expense_ranking :: proc(year, month: int) {
 	for item in items {
