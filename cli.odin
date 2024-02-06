@@ -339,7 +339,7 @@ cli_args :: proc() {
 					buf_month: [256]byte
 					n_month, err_month := os.read(os.stdin, buf_month[:])
 					assert(err_month >= 0, string("input error"))
-					for strconv.atoi(string(buf_month[:])) > 12 ||
+					for strconv.atoi(string(buf_month[:])) > 31 ||
 				    	strconv.atoi(string(buf_month[:])) <= 0 {
 						fmt.println("Please re-type:")
 						n_month, err_month = os.read(os.stdin, buf_month[:])
@@ -376,13 +376,15 @@ cli_args :: proc() {
 						n_month, err_month = os.read(os.stdin, buf_month[:])
 						assert(err_month >= 0, string("input error"))
 					}
+					arg[1] = string(buf_month[:n_month - 1])
+
 
 					fmt.println("\n----------")
 					fmt.print("day: ")
 					buf_day: [256]byte
 					n_day, err_day := os.read(os.stdin, buf_day[:])
 					assert(err_day >= 0, string("input error"))
-					for strconv.atoi(string(buf_day[:])) > 12 ||
+					for strconv.atoi(string(buf_day[:])) > 31 ||
 				    	strconv.atoi(string(buf_day[:])) <= 0 {
 						fmt.println("Please re-type:")
 						n_day, err_day = os.read(os.stdin, buf_day[:])
