@@ -232,7 +232,7 @@ cli_args :: proc() {
 					arg[1],
 					"income: ",
 					get_month_income(strconv.atoi(arg[0]), strconv.atoi(arg[1])),
-					"\n"
+					"\n",
 				)
 			case "1":
 				fmt.println("\n----------")
@@ -265,7 +265,7 @@ cli_args :: proc() {
 
 
 		case "2":
-		/******************************
+			/******************************
 			2. expense
 				0. -e monthly expense
 				1. -ea except housing
@@ -293,154 +293,163 @@ cli_args :: proc() {
 			}
 
 			switch cast(string)buf_expense[:n - 1] {
-				case "0":
-					fmt.println("\n----------")
-					fmt.print("year: ")
+			case "0":
+				fmt.println("\n----------")
+				fmt.print("year: ")
 
-					arg: [2]string
-					buf_year: [256]byte
-					n_year, err_year := os.read(os.stdin, buf_year[:])
-					assert(err_year >= 0, string("input error"))
-					arg[0] = string(buf_year[:n_year - 1])
+				arg: [2]string
+				buf_year: [256]byte
+				n_year, err_year := os.read(os.stdin, buf_year[:])
+				assert(err_year >= 0, string("input error"))
+				arg[0] = string(buf_year[:n_year - 1])
 
-					fmt.println("\n----------")
-					fmt.print("month: ")
-					buf_month: [256]byte
-					n_month, err_month := os.read(os.stdin, buf_month[:])
+				fmt.println("\n----------")
+				fmt.print("month: ")
+				buf_month: [256]byte
+				n_month, err_month := os.read(os.stdin, buf_month[:])
+				assert(err_month >= 0, string("input error"))
+				for strconv.atoi(string(buf_month[:])) > 12 ||
+				    strconv.atoi(string(buf_month[:])) <= 0 {
+					fmt.println("Please re-type:")
+					n_month, err_month = os.read(os.stdin, buf_month[:])
 					assert(err_month >= 0, string("input error"))
-					for strconv.atoi(string(buf_month[:])) > 12 ||
-				    	strconv.atoi(string(buf_month[:])) <= 0 {
-						fmt.println("Please re-type:")
-						n_month, err_month = os.read(os.stdin, buf_month[:])
-						assert(err_month >= 0, string("input error"))
-					}
-					arg[1] = string(buf_month[:n_month - 1])
+				}
+				arg[1] = string(buf_month[:n_month - 1])
 
-					fmt.println("\n----------")
-					fmt.println(
-						arg[0],
-						arg[1],
-						"expense: ",
-						get_month_expense(strconv.atoi(arg[0]), strconv.atoi(arg[1])),
-						"\n"
-					)
-				case "1":
-					fmt.println("\n----------")
-					fmt.print("year: ")
+				fmt.println("\n----------")
+				fmt.println(
+					arg[0],
+					arg[1],
+					"expense: ",
+					get_month_expense(strconv.atoi(arg[0]), strconv.atoi(arg[1])),
+					"\n",
+				)
+			case "1":
+				fmt.println("\n----------")
+				fmt.print("year: ")
 
-					arg: [2]string
-					buf_year: [256]byte
-					n_year, err_year := os.read(os.stdin, buf_year[:])
-					assert(err_year >= 0, string("input error"))
-					arg[0] = string(buf_year[:n_year - 1])
+				arg: [2]string
+				buf_year: [256]byte
+				n_year, err_year := os.read(os.stdin, buf_year[:])
+				assert(err_year >= 0, string("input error"))
+				arg[0] = string(buf_year[:n_year - 1])
 
-					fmt.println("\n----------")
-					fmt.print("month: ")
-					buf_month: [256]byte
-					n_month, err_month := os.read(os.stdin, buf_month[:])
+				fmt.println("\n----------")
+				fmt.print("month: ")
+				buf_month: [256]byte
+				n_month, err_month := os.read(os.stdin, buf_month[:])
+				assert(err_month >= 0, string("input error"))
+				for strconv.atoi(string(buf_month[:])) > 31 ||
+				    strconv.atoi(string(buf_month[:])) <= 0 {
+					fmt.println("Please re-type:")
+					n_month, err_month = os.read(os.stdin, buf_month[:])
 					assert(err_month >= 0, string("input error"))
-					for strconv.atoi(string(buf_month[:])) > 31 ||
-				    	strconv.atoi(string(buf_month[:])) <= 0 {
-						fmt.println("Please re-type:")
-						n_month, err_month = os.read(os.stdin, buf_month[:])
-						assert(err_month >= 0, string("input error"))
-					}
-					arg[1] = string(buf_month[:n_month - 1])
+				}
+				arg[1] = string(buf_month[:n_month - 1])
 
-					fmt.println("\n----------")
-					fmt.println(
-						arg[0],
-						arg[1],
-						"expense: ",
-						get_month_expense_except_housing(strconv.atoi(arg[0]), strconv.atoi(arg[1])),
-						"\n"
-					)
-				case "2":
-					fmt.println("\n----------")
-					fmt.print("year: ")
+				fmt.println("\n----------")
+				fmt.println(
+					arg[0],
+					arg[1],
+					"expense: ",
+					get_month_expense_except_housing(strconv.atoi(arg[0]), strconv.atoi(arg[1])),
+					"\n",
+				)
+			case "2":
+				fmt.println("\n----------")
+				fmt.print("year: ")
 
-					arg: [3]string
-					buf_year: [256]byte
-					n_year, err_year := os.read(os.stdin, buf_year[:])
-					assert(err_year >= 0, string("input error"))
-					arg[0] = string(buf_year[:n_year - 1])
+				arg: [3]string
+				buf_year: [256]byte
+				n_year, err_year := os.read(os.stdin, buf_year[:])
+				assert(err_year >= 0, string("input error"))
+				arg[0] = string(buf_year[:n_year - 1])
 
-					fmt.println("\n----------")
-					fmt.print("month: ")
-					buf_month: [256]byte
-					n_month, err_month := os.read(os.stdin, buf_month[:])
+				fmt.println("\n----------")
+				fmt.print("month: ")
+				buf_month: [256]byte
+				n_month, err_month := os.read(os.stdin, buf_month[:])
+				assert(err_month >= 0, string("input error"))
+				for strconv.atoi(string(buf_month[:])) > 12 ||
+				    strconv.atoi(string(buf_month[:])) <= 0 {
+					fmt.println("Please re-type:")
+					n_month, err_month = os.read(os.stdin, buf_month[:])
 					assert(err_month >= 0, string("input error"))
-					for strconv.atoi(string(buf_month[:])) > 12 ||
-				    	strconv.atoi(string(buf_month[:])) <= 0 {
-						fmt.println("Please re-type:")
-						n_month, err_month = os.read(os.stdin, buf_month[:])
-						assert(err_month >= 0, string("input error"))
-					}
-					arg[1] = string(buf_month[:n_month - 1])
+				}
+				arg[1] = string(buf_month[:n_month - 1])
 
 
-					fmt.println("\n----------")
-					fmt.print("day: ")
-					buf_day: [256]byte
-					n_day, err_day := os.read(os.stdin, buf_day[:])
+				fmt.println("\n----------")
+				fmt.print("day: ")
+				buf_day: [256]byte
+				n_day, err_day := os.read(os.stdin, buf_day[:])
+				assert(err_day >= 0, string("input error"))
+				for strconv.atoi(string(buf_day[:])) > 31 ||
+				    strconv.atoi(string(buf_day[:])) <= 0 {
+					fmt.println("Please re-type:")
+					n_day, err_day = os.read(os.stdin, buf_day[:])
 					assert(err_day >= 0, string("input error"))
-					for strconv.atoi(string(buf_day[:])) > 31 ||
-				    	strconv.atoi(string(buf_day[:])) <= 0 {
-						fmt.println("Please re-type:")
-						n_day, err_day = os.read(os.stdin, buf_day[:])
-						assert(err_day >= 0, string("input error"))
-					}
-					arg[2] = string(buf_day[:n_day - 1])
+				}
+				arg[2] = string(buf_day[:n_day - 1])
 
-					fmt.println("\n----------")
-					fmt.println(
-						arg[0],
-						arg[1],
-						arg[2],
-						"expense before: ",
-						get_expense_before_billing_day(strconv.atoi(arg[0]), strconv.atoi(arg[1]),cast(i64)strconv.atoi(arg[2])),
-						"\n"
-					)
-				case "3":
-					fmt.println("\n----------")
-					fmt.print("year: ")
+				fmt.println("\n----------")
+				fmt.println(
+					arg[0],
+					arg[1],
+					arg[2],
+					"expense before: ",
+					get_expense_before_billing_day(
+						strconv.atoi(arg[0]),
+						strconv.atoi(arg[1]),
+						cast(i64)strconv.atoi(arg[2]),
+					),
+					"\n",
+				)
+			case "3":
+				fmt.println("\n----------")
+				fmt.print("year: ")
 
-					arg: [2]string
-					buf_year: [256]byte
-					n_year, err_year := os.read(os.stdin, buf_year[:])
-					assert(err_year >= 0, string("input error"))
-					arg[0] = string(buf_year[:n_year - 1])
+				arg: [2]string
+				buf_year: [256]byte
+				n_year, err_year := os.read(os.stdin, buf_year[:])
+				assert(err_year >= 0, string("input error"))
+				arg[0] = string(buf_year[:n_year - 1])
 
-					fmt.println("\n----------")
-					fmt.print("month: ")
-					buf_month: [256]byte
-					n_month, err_month := os.read(os.stdin, buf_month[:])
+				fmt.println("\n----------")
+				fmt.print("month: ")
+				buf_month: [256]byte
+				n_month, err_month := os.read(os.stdin, buf_month[:])
+				assert(err_month >= 0, string("input error"))
+				for strconv.atoi(string(buf_month[:])) > 12 ||
+				    strconv.atoi(string(buf_month[:])) <= 0 {
+					fmt.println("Please re-type:")
+					n_month, err_month = os.read(os.stdin, buf_month[:])
 					assert(err_month >= 0, string("input error"))
-					for strconv.atoi(string(buf_month[:])) > 12 ||
-				    	strconv.atoi(string(buf_month[:])) <= 0 {
-						fmt.println("Please re-type:")
-						n_month, err_month = os.read(os.stdin, buf_month[:])
-						assert(err_month >= 0, string("input error"))
-					}
-					arg[1] = string(buf_month[:n_month - 1])
+				}
+				arg[1] = string(buf_month[:n_month - 1])
 
-					fmt.println("\n----------")
-					fmt.println(arg[0], arg[1], "expense ranking:")
-					get_expense_ranking(strconv.atoi(arg[0]), strconv.atoi(arg[1]))
-					fmt.print("\n")
-				case "4":
-					fmt.println("\n----------")
-					fmt.print("year: ")
+				fmt.println("\n----------")
+				fmt.println(arg[0], arg[1], "expense ranking:")
+				get_expense_ranking(strconv.atoi(arg[0]), strconv.atoi(arg[1]))
+				fmt.print("\n")
+			case "4":
+				fmt.println("\n----------")
+				fmt.print("year: ")
 
-					arg: string
-					buf_year: [256]byte
-					n_year, err_year := os.read(os.stdin, buf_year[:])
-					assert(err_year >= 0, string("input error"))
-					arg = string(buf_year[:n_year - 1])
+				arg: string
+				buf_year: [256]byte
+				n_year, err_year := os.read(os.stdin, buf_year[:])
+				assert(err_year >= 0, string("input error"))
+				arg = string(buf_year[:n_year - 1])
 
 
-					fmt.println("\n----------")
-					fmt.println(arg, "expense yearly: ", get_total_expense_in_year(strconv.atoi(arg)),"\n")
+				fmt.println("\n----------")
+				fmt.println(
+					arg,
+					"expense yearly: ",
+					get_total_expense_in_year(strconv.atoi(arg)),
+					"\n",
+				)
 			}
 		}
 
